@@ -6,7 +6,7 @@
 /*   By: ldesboui <ldesboui@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 18:33:54 by ldesboui          #+#    #+#             */
-/*   Updated: 2025/12/03 11:04:28 by ldesboui         ###   ########.fr       */
+/*   Updated: 2025/12/03 11:08:16 by ldesboui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,5 +78,6 @@ int **parse(const char *map)
 		}
 	}
 	intss = strstointss(strs);
+	freeall(strs);
 	return (intss);
 }
