@@ -6,73 +6,77 @@
 /*   By: ldesboui <ldesboui@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 18:33:54 by ldesboui          #+#    #+#             */
-/*   Updated: 2025/12/02 19:45:45 by ldesboui         ###   ########.fr       */
+/*   Updated: 2025/12/03 11:04:28 by ldesboui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/fdf.h"
 
-static int	nb_line(const char *map)
+static void fill_line(int *ints, char *str)
 {
-	char	*str;
-	int		fd;
-	int		nb;
-	
-	nb = 0;
-	fd = open (map, O_RDONLY);
-	str = get_next_line(fd);
-	while (str)
-	{
-		free (str);
-		str = get_next_line(fd);
-		++nb;
-	}
-	free (str);
-	return (nb);
-}
+	int		i;
+	char	**strs;
 
-static void freeall(char **strs)
-{
-	int	i;
-
+	strs = ft_split(str, ' ');
+	if (!strs)
+		return ;
+	i = 0;
 	while (strs[i])
 	{
-		free(strs[i]);
+		ints[i] = ft_atoi(strs[i]);
 		++i;
 	}
-	free(strs);
 }
 
 static int **strstointss(char **strs)
 {
 	int **intss;
+	int i;
 
 	intss = ft_calloc(sizeof(int *), ft_strslen(strs));
 	if (!intss)
 		return (NULL);
-	
+	i = 0;
+	while (strs[i])
+	{
+		intss[i] = ft_calloc(sizeof(int), ft_wordcount(strs[i]));
+		if (!intss[i])
+		{
+			freeall_intss(intss);
+			return (NULL);
+		}
+		fill_line(intss[i], strs[i]);
+	}
+	freeall(strs);
+	return (intss);
 }
 
-void parse(const char *map)
+int **parse(const char *map)
 {
-	char	**str;
+	char	**strs;
 	int		fd;
 	int		nb;
+	int		**intss;
 
 	nb = nb_line(map);
-	str = ft_calloc(sizeof(char *), nb + 1);
-	if (!str)
-		return ;
+	strs = ft_calloc(sizeof(char *), nb + 1);
+	if (!strs)
+		return (NULL);
 	fd = open (map, O_RDONLY);
 	nb = 0;
-	str[0] = get_next_line(fd);
-	if (!str[0])
-		return ;
-	while (str[nb])
+	strs[0] = get_next_line(fd);
+	if (!strs[0])
+		return (NULL);
+	while (strs[nb])
 	{
 		++nb;
-		str[nb] = get_next_line(fd);
-		if (!str[nb])
-			freeall(str);
+		strs[nb] = get_next_line(fd);
+		if (!strs[nb])
+		{
+			freeall(strs);
+			return (NULL);
+		}
 	}
+	intss = strstointss(strs);
+	return (intss);
 }

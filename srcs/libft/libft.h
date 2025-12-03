@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ldesboui <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ldesboui <ldesboui@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 14:55:10 by ldesboui          #+#    #+#             */
-/*   Updated: 2025/11/28 12:42:27 by ldesboui         ###   ########.fr       */
+/*   Updated: 2025/12/03 10:20:18 by ldesboui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,5 +67,7 @@ void	ft_lstclear(t_list **lst, void (*del)(void*));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 long	ft_atoi_long(const char *nptr);
+int		ft_wordcount(const char *s);
+
 
 #endif
