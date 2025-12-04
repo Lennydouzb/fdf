@@ -6,7 +6,7 @@
 /*   By: ldesboui <ldesboui@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 18:33:54 by ldesboui          #+#    #+#             */
-/*   Updated: 2025/12/03 11:08:16 by ldesboui         ###   ########.fr       */
+/*   Updated: 2025/12/04 16:27:42 by ldesboui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static void fill_line(int *ints, char *str)
 		ints[i] = ft_atoi(strs[i]);
 		++i;
 	}
+	freeall_strs(strs);
 }
 
 static int **strstointss(char **strs)
@@ -33,7 +34,7 @@ static int **strstointss(char **strs)
 	int **intss;
 	int i;
 
-	intss = ft_calloc(sizeof(int *), ft_strslen(strs));
+	intss = ft_calloc(sizeof(int *), ft_strslen(strs) + 1);
 	if (!intss)
 		return (NULL);
 	i = 0;
@@ -46,12 +47,30 @@ static int **strstointss(char **strs)
 			return (NULL);
 		}
 		fill_line(intss[i], strs[i]);
+		++i;
 	}
-	freeall(strs);
+	freeall_strs(strs);
 	return (intss);
 }
 
-int **parse(const char *map)
+static int	size_x(char **strs, int *size)
+{
+	int		i;
+	int		tmp_size;
+
+	tmp_size = ft_wordcount(strs[0]);
+	i = 1;
+	while (strs[i])
+	{
+		if (tmp_size != ft_wordcount(strs[i]))
+			return (0);
+		++i;
+	}
+	*size = tmp_size;
+	return (1);
+}
+
+int **parse(const char *map, int *size)
 {
 	char	**strs;
 	int		fd;
@@ -71,13 +90,11 @@ int **parse(const char *map)
 	{
 		++nb;
 		strs[nb] = get_next_line(fd);
-		if (!strs[nb])
-		{
-			freeall(strs);
-			return (NULL);
-		}
 	}
-	intss = strstointss(strs);
-	freeall(strs);
+	nb = size_x(strs, size);
+	if (nb == 1)
+		intss = strstointss(strs);
+	else
+		intss = NULL;
 	return (intss);
 }

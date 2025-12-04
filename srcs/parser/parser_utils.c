@@ -6,7 +6,7 @@
 /*   By: ldesboui <ldesboui@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 10:21:14 by ldesboui          #+#    #+#             */
-/*   Updated: 2025/12/03 10:21:14 by ldesboui         ###   ########.fr       */
+/*   Updated: 2025/12/03 15:13:48 by ldesboui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../../includes/fdf.h"
@@ -30,10 +30,11 @@ int	nb_line(const char *map)
 	return (nb);
 }
 
-void    freeall(char **strs)
+void    freeall_strs(char **strs)
 {
 	int	i;
 
+	i = 0;
 	while (strs[i])
 	{
 		free(strs[i]);
@@ -46,6 +47,7 @@ void    freeall_intss(int **intss)
 {
 	int	i;
 
+	i = 0;
 	while (intss[i])
 	{
 		free(intss[i]);

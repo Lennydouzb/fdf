@@ -6,14 +6,20 @@
 /*   By: ldesboui <ldesboui@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 16:39:07 by ldesboui          #+#    #+#             */
-/*   Updated: 2025/12/03 11:01:03 by ldesboui         ###   ########.fr       */
+/*   Updated: 2025/12/04 17:20:23 by ldesboui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
+# ifndef ISO
+#	define ISO 0.523599
+# endif
+# ifndef ZOOM
+#  define ZOOM 30
+# endif
 
-# include "../minilibx-linux/mlx.h"
+# include "../MacroLibX/includes/mlx.h"
 # include <fcntl.h>
 # include <math.h>
 # include "../srcs/libft/libft.h"
@@ -21,17 +27,20 @@
 
 typedef struct	s_mlx
 {
-	void	*mlx;
-	void	*win;
-	void	*img;
-	char	*buffer;
+	mlx_context				mlx;
+	mlx_window_create_info	info;
+	mlx_window				win;
+	mlx_image				img;
+	mlx_window				img_win;
+	mlx_window_create_info	img_info;
 }	t_mlx;
 
-# define ISO 0.523599
 char	*get_next_line(int fd);
 int		nb_line(const char *map);
-void 	freeall(char **strs);
+void 	freeall_strs(char **strs);
 void	freeall_intss(int **intss);
-int		**parse(const char *map);
-
+int		**parse(const char *map, int *size);
+void	place_color(t_mlx *mlx, int **ints, int line_size);
+t_mlx	*initialize();
+void	key_hook(int key, void* param);
 #endif

@@ -1,18 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mlx_destroy_display.c                              :+:      :+:    :+:   */
+/*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mg <mg@student.42.fr>                      +#+  +:+       +#+        */
+/*   By: ldesboui <ldesboui@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/10/03 18:56:35 by mg                #+#    #+#             */
-/*   Updated: 2020/10/04 01:55:35 by mg               ###   ########.fr       */
+/*   Created: 2025/12/04 17:15:44 by ldesboui          #+#    #+#             */
+/*   Updated: 2025/12/04 17:21:04 by ldesboui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "mlx_int.h"
+#include "../../includes/fdf.h"
 
-int	mlx_destroy_display(t_xvar *xvar)
+void key_hook(int key, void* param)
 {
-	XCloseDisplay(xvar->display);
+	ft_printf("%d", key);
+    if(key == 41)
+        mlx_loop_end((mlx_context)param);
 }
