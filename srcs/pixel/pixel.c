@@ -6,13 +6,13 @@
 /*   By: ldesboui <ldesboui@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 15:26:43 by ldesboui          #+#    #+#             */
-/*   Updated: 2025/12/04 17:31:29 by ldesboui         ###   ########.fr       */
+/*   Updated: 2025/12/04 21:24:17 by ldesboui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/fdf.h"
 
-static void coordinates(int **ints, int *x, int *y)
+static void coordinates(int **ints, int *x, int *y, t_sizemap *size)
 {
 	int	basex;
 	int	basey;
@@ -25,11 +25,11 @@ static void coordinates(int **ints, int *x, int *y)
 	*y *= ZOOM;
 	*x = (*x - *y) * cos(ISO);
 	*y = ((tmp_zoomedx + *y) * sin(ISO)) - (ints[basey][basex] * ZOOM);
-	*x += 600;
-	*y += 300;
+	*x = *x - (size->size_x / 2) + 1920 / 2;
+	*y = *y - (size->size_y / 2) + 1080 / 2;
 }
 
-void	place_color(t_mlx *mlx, int **ints, int line_size)
+void	place_color(t_mlx *mlx, int **ints, t_sizemap *size)
 {
 	int	i;
 	int	k;
@@ -37,14 +37,14 @@ void	place_color(t_mlx *mlx, int **ints, int line_size)
 	int y;	
 
 	i = 0;
-	while (ints[i])
+	while (i < size->size_y)
 	{
 		k = 0;
-		while (k < line_size)
+		while (k < size->size_x)
 		{
 			x = k;
 			y = i;
-			coordinates(ints, &x, &y);
+			coordinates(ints, &x, &y, size);
 			mlx_set_image_pixel(mlx->mlx, mlx->img, x, y, (mlx_color){.rgba = 0xFFFFFFFF});
 			++k;
 		}

@@ -6,7 +6,7 @@
 /*   By: ldesboui <ldesboui@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 18:33:54 by ldesboui          #+#    #+#             */
-/*   Updated: 2025/12/04 16:27:42 by ldesboui         ###   ########.fr       */
+/*   Updated: 2025/12/04 20:09:31 by ldesboui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static int **strstointss(char **strs)
 	return (intss);
 }
 
-static int	size_x(char **strs, int *size)
+static int	size_xy(char **strs, t_sizemap *size)
 {
 	int		i;
 	int		tmp_size;
@@ -66,11 +66,12 @@ static int	size_x(char **strs, int *size)
 			return (0);
 		++i;
 	}
-	*size = tmp_size;
+	size->size_x = tmp_size;
+	size->size_y = i;
 	return (1);
 }
 
-int **parse(const char *map, int *size)
+int **parse(const char *map, t_sizemap *size)
 {
 	char	**strs;
 	int		fd;
@@ -91,7 +92,7 @@ int **parse(const char *map, int *size)
 		++nb;
 		strs[nb] = get_next_line(fd);
 	}
-	nb = size_x(strs, size);
+	nb = size_xy(strs, size);
 	if (nb == 1)
 		intss = strstointss(strs);
 	else
