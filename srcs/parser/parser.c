@@ -6,13 +6,13 @@
 /*   By: ldesboui <ldesboui@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 18:33:54 by ldesboui          #+#    #+#             */
-/*   Updated: 2025/12/04 20:09:31 by ldesboui         ###   ########.fr       */
+/*   Updated: 2025/12/05 11:38:57 by ldesboui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/fdf.h"
 
-static void fill_line(int *ints, char *str)
+/*static void fill_line(int *ints, char *str)
 {
 	int		i;
 	char	**strs;
@@ -51,6 +51,51 @@ static int **strstointss(char **strs)
 	}
 	freeall_strs(strs);
 	return (intss);
+}*/
+
+static void fill_points(t_point *points, char *str, int y)
+{
+	int		i;
+	char	**strs;
+	char 	**strs2;
+
+	strs = ft_split(str, ' ');
+	if (!strs)
+		return ;
+	i = 0;
+	while (strs[i])
+	{
+		strs2 = ft_split(strs[i], ',');
+		if (!strs2)
+			return ;
+		if (ft_strslen(strs2) > 1)
+			(points[i]).color = ft_atoi(strs2[1]);
+		else
+			(points[i]).color = 0xFFFFFFFF;
+		points[i].x = i;
+		points[i].y = y;
+		points[i].z = ft_atoi(strs2[0]);
+		++i;
+	}
+	freeall_2strs(strs, strs2);
+}
+
+static int **strstopoints(char **strs)
+{
+	t_point *points;
+	int i;
+
+	points = ft_calloc(sizeof(t_point), ft_strslen(strs) + 1);
+	if (!points)
+		return (NULL);
+	i = 0;
+	while (strs[i])
+	{
+		fill_points(points[i], strs[i], i);
+		++i;
+	}
+	freeall_strs(strs);
+	return (intss);
 }
 
 static int	size_xy(char **strs, t_sizemap *size)
@@ -76,7 +121,7 @@ int **parse(const char *map, t_sizemap *size)
 	char	**strs;
 	int		fd;
 	int		nb;
-	int		**intss;
+	t_point *points;
 
 	nb = nb_line(map);
 	strs = ft_calloc(sizeof(char *), nb + 1);
@@ -94,8 +139,8 @@ int **parse(const char *map, t_sizemap *size)
 	}
 	nb = size_xy(strs, size);
 	if (nb == 1)
-		intss = strstointss(strs);
+		points = strstopoints(strs);
 	else
-		intss = NULL;
-	return (intss);
+		points = NULL;
+	return (points);
 }
