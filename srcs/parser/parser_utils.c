@@ -43,26 +43,6 @@ void    freeall_strs(char **strs)
 	free(strs);
 }
 
-void    freeall_2strs(char **strs, char **strs2)
-{
-	int	i;
-
-	i = 0;
-	while (strs[i])
-	{
-		free(strs[i]);
-		++i;
-	}
-	free(strs);
-	i = 0;
-	while (strs2[i])
-	{
-		free(strs2[i]);
-		++i;
-	}
-	free(strs2);
-}
-
 void    freeall_intss(int **intss)
 {
 	int	i;

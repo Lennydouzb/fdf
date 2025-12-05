@@ -6,7 +6,7 @@
 /*   By: ldesboui <ldesboui@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 16:39:07 by ldesboui          #+#    #+#             */
-/*   Updated: 2025/12/05 11:41:10 by ldesboui         ###   ########.fr       */
+/*   Updated: 2025/12/05 15:55:18 by ldesboui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ char	*get_next_line(int fd);
 int		nb_line(const char *map);
 void 	freeall_strs(char **strs);
 void	freeall_intss(int **intss);
-int		**parse(const char *map, t_sizemap *size);
-void	place_color(t_mlx *mlx, int **ints, t_sizemap *size);
+t_point	*parse(const char *map, t_sizemap *size);
+void	place_color(t_mlx *mlx, t_point *points, t_sizemap *size);
 t_mlx	*initialize();
 void	key_hook(int key, void* param);
 void	win_hook(int event, void* param);

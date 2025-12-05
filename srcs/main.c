@@ -6,11 +6,23 @@
 /*   By: ldesboui <ldesboui@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 13:53:40 by ldesboui          #+#    #+#             */
-/*   Updated: 2025/12/05 11:39:50 by ldesboui         ###   ########.fr       */
+/*   Updated: 2025/12/05 16:05:34 by ldesboui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fdf.h"
+
+void	print_points(t_point *points)
+{
+	int	i;
+
+	i = 0;
+	while (points[i].x || points[i].y)
+	{
+		ft_printf("Point %d : x = %d, y = %d, z = %d, screen_x = %d, screen_y = %d, color = %d\n", i, points[i].x, points[i].y, points[i].z, points[i].screen_x, points[i].screen_y, points[i].color);
+		++i;
+	}
+}
 
 int	main(void)
 {
@@ -21,7 +33,10 @@ int	main(void)
 	mlx = initialize();
 	if (!mlx)
 		return (1);
-	points = parse("maps/test_maps/42.fdf", &size);
+	points = parse("maps/test_maps/pyra.fdf", &size);
+	if (!points)
+		return (1);
+	print_points(points);
 	place_color(mlx, points, &size);
     mlx_on_event(mlx->mlx, mlx->win, MLX_KEYDOWN, key_hook, mlx->mlx);
 	mlx_on_event(mlx->mlx, mlx->win, MLX_WINDOW_EVENT, win_hook, mlx->mlx);

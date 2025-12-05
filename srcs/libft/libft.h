@@ -6,7 +6,7 @@
 /*   By: ldesboui <ldesboui@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 14:55:10 by ldesboui          #+#    #+#             */
-/*   Updated: 2025/12/03 10:20:18 by ldesboui         ###   ########.fr       */
+/*   Updated: 2025/12/05 15:44:26 by ldesboui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,6 @@ void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 long	ft_atoi_long(const char *nptr);
 int		ft_wordcount(const char *s);
-
+int		ft_atoi_hex(const char *nptr);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ldesboui <ldesboui@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 18:33:54 by ldesboui          #+#    #+#             */
-/*   Updated: 2025/12/05 11:38:57 by ldesboui         ###   ########.fr       */
+/*   Updated: 2025/12/05 15:57:34 by ldesboui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static int **strstointss(char **strs)
 	return (intss);
 }*/
 
-static void fill_points(t_point *points, char *str, int y)
+static void fill_points(t_point *points, char *str, int y, t_sizemap *size)
 {
 	int		i;
 	char	**strs;
@@ -67,35 +67,39 @@ static void fill_points(t_point *points, char *str, int y)
 	{
 		strs2 = ft_split(strs[i], ',');
 		if (!strs2)
+		{
+			freeall_strs(strs);
 			return ;
+		}
 		if (ft_strslen(strs2) > 1)
-			(points[i]).color = ft_atoi(strs2[1]);
+			(points[i + y * size->size_x]).color = ft_atoi_hex(strs2[1]);
 		else
-			(points[i]).color = 0xFFFFFFFF;
-		points[i].x = i;
-		points[i].y = y;
-		points[i].z = ft_atoi(strs2[0]);
+			(points[i + y * size->size_x]).color = 0xFFFFFFFF;
+		points[i + y * size->size_x].x = i;
+		points[i + y * size->size_x].y = y;
+		points[i + y * size->size_x].z = ft_atoi(strs2[0]);
 		++i;
+		freeall_strs(strs2);
 	}
-	freeall_2strs(strs, strs2);
+	freeall_strs(strs);
 }
 
-static int **strstopoints(char **strs)
+static t_point	*strstopoints(char **strs, t_sizemap *size)
 {
 	t_point *points;
 	int i;
 
-	points = ft_calloc(sizeof(t_point), ft_strslen(strs) + 1);
+	points = ft_calloc(sizeof(t_point), (size->size_x * size->size_y) + 1);
 	if (!points)
 		return (NULL);
 	i = 0;
 	while (strs[i])
 	{
-		fill_points(points[i], strs[i], i);
+		fill_points(points, strs[i], i, size);
 		++i;
 	}
 	freeall_strs(strs);
-	return (intss);
+	return (points);
 }
 
 static int	size_xy(char **strs, t_sizemap *size)
@@ -116,7 +120,7 @@ static int	size_xy(char **strs, t_sizemap *size)
 	return (1);
 }
 
-int **parse(const char *map, t_sizemap *size)
+t_point	*parse(const char *map, t_sizemap *size)
 {
 	char	**strs;
 	int		fd;
@@ -131,7 +135,11 @@ int **parse(const char *map, t_sizemap *size)
 	nb = 0;
 	strs[0] = get_next_line(fd);
 	if (!strs[0])
+	{
+		close(fd);
+		freeall_strs(strs);
 		return (NULL);
+	}
 	while (strs[nb])
 	{
 		++nb;
@@ -139,8 +147,9 @@ int **parse(const char *map, t_sizemap *size)
 	}
 	nb = size_xy(strs, size);
 	if (nb == 1)
-		points = strstopoints(strs);
+		points = strstopoints(strs, size);
 	else
 		points = NULL;
+	close(fd);
 	return (points);
 }
