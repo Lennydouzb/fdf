@@ -6,7 +6,7 @@
 /*   By: ldesboui <ldesboui@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 16:39:07 by ldesboui          #+#    #+#             */
-/*   Updated: 2025/12/05 15:55:18 by ldesboui         ###   ########.fr       */
+/*   Updated: 2025/12/08 11:31:39 by ldesboui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,12 @@ typedef struct s_sizemap
 
 typedef struct s_point
 {
-	int	x;
-	int	y;
-	int	screen_x;
-	int	screen_y;
-	int	z;
-	int	color;
+	int			x;
+	int			y;
+	int			screen_x;
+	int			screen_y;
+	int			z;
+	mlx_color	color;
 }	t_point;
 
 char	*get_next_line(int fd);

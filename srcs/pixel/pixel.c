@@ -6,7 +6,7 @@
 /*   By: ldesboui <ldesboui@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 15:26:43 by ldesboui          #+#    #+#             */
-/*   Updated: 2025/12/05 16:01:07 by ldesboui         ###   ########.fr       */
+/*   Updated: 2025/12/08 11:31:05 by ldesboui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void	place_color(t_mlx *mlx, t_point *points, t_sizemap *size)
 	{
 		coordinates(&points[i], size);
 		mlx_set_image_pixel(mlx->mlx, mlx->img, points[i].screen_x,
-			 points[i].screen_y, (mlx_color){.rgba = 0xFFFFFFFF});
+			 points[i].screen_y, points[i].color);
 		++i;
 	}
     mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img, 0, 0);
