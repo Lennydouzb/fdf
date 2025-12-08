@@ -6,7 +6,7 @@
 /*   By: ldesboui <ldesboui@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 18:33:54 by ldesboui          #+#    #+#             */
-/*   Updated: 2025/12/05 15:57:34 by ldesboui         ###   ########.fr       */
+/*   Updated: 2025/12/08 12:57:25 by ldesboui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,9 @@ static void fill_points(t_point *points, char *str, int y, t_sizemap *size)
 			return ;
 		}
 		if (ft_strslen(strs2) > 1)
-			(points[i + y * size->size_x]).color = ft_atoi_hex(strs2[1]);
+			(points[i + y * size->size_x]).color.rgba = ft_atoi_hex(strs2[1]);
 		else
-			(points[i + y * size->size_x]).color = 0xFFFFFFFF;
+			(points[i + y * size->size_x]).color.rgba = 0xFFFFFFFF;
 		points[i + y * size->size_x].x = i;
 		points[i + y * size->size_x].y = y;
 		points[i + y * size->size_x].z = ft_atoi(strs2[0]);

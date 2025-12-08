@@ -6,7 +6,7 @@
 /*   By: ldesboui <ldesboui@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 16:39:07 by ldesboui          #+#    #+#             */
-/*   Updated: 2025/12/08 11:31:39 by ldesboui         ###   ########.fr       */
+/*   Updated: 2025/12/08 19:32:28 by ldesboui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # ifndef ZOOM
 #  define ZOOM 30
 # endif
+# define ABS(Value) (Value * (Value >= 0) - Value * (Value < 0))
 
 # include "../MacroLibX/includes/mlx.h"
 # include <fcntl.h>
@@ -60,5 +61,7 @@ void	place_color(t_mlx *mlx, t_point *points, t_sizemap *size);
 t_mlx	*initialize();
 void	key_hook(int key, void* param);
 void	win_hook(int event, void* param);
+void	bresenham(t_point *points, t_sizemap *size, t_mlx *mlx);
+void	print_points(t_point *points, t_sizemap size);
 
 #endif

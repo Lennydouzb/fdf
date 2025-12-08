@@ -6,7 +6,7 @@
 /*   By: ldesboui <ldesboui@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 15:26:43 by ldesboui          #+#    #+#             */
-/*   Updated: 2025/12/08 11:31:05 by ldesboui         ###   ########.fr       */
+/*   Updated: 2025/12/08 19:11:33 by ldesboui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,5 +98,6 @@ void	place_color(t_mlx *mlx, t_point *points, t_sizemap *size)
 			 points[i].screen_y, points[i].color);
 		++i;
 	}
+	bresenham(points, size, mlx);	
     mlx_put_image_to_window(mlx->mlx, mlx->win, mlx->img, 0, 0);
 }

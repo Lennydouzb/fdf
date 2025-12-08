@@ -6,7 +6,7 @@
 /*   By: ldesboui <ldesboui@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 13:53:40 by ldesboui          #+#    #+#             */
-/*   Updated: 2025/12/08 11:24:39 by ldesboui         ###   ########.fr       */
+/*   Updated: 2025/12/08 12:53:37 by ldesboui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	print_points(t_point *points, t_sizemap size)
 	i = 0;
 	while (i < size.size_x * size.size_y)
 	{
-		ft_printf("Point %d : x = %d, y = %d, z = %d, screen_x = %d, screen_y = %d, color = %d\n", i, points[i].x, points[i].y, points[i].z, points[i].screen_x, points[i].screen_y, points[i].color);
+		ft_printf("Point %d : x = %d, y = %d, z = %d, screen_x = %d, screen_y = %d\n", i, points[i].x, points[i].y, points[i].z, points[i].screen_x, points[i].screen_y);
 		++i;
 	}
 }
