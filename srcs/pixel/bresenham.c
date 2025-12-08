@@ -6,36 +6,18 @@
 /*   By: ldesboui <ldesboui@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 12:59:34 by ldesboui          #+#    #+#             */
-/*   Updated: 2025/12/08 20:15:45 by ldesboui         ###   ########.fr       */
+/*   Updated: 2025/12/08 21:20:20 by ldesboui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/fdf.h"
-//static void trace_debug(int x0, int y0, int x1, int y1, t_mlx *mlx)
-//{
-//    int dx = abs(x1 - x0);
-//    int dy = abs(y1 - y0);
-//    int sx = (x0 < x1) ? 1 : -1;
-//    int sy = (y0 < y1) ? 1 : -1;
-//    int err = dx - dy;
-//    int e2;
-//    
-//    // DEBUG COULEUR : Vert si mur (dy > dx), Rouge si plat (dx > dy)
-//    int color = (dy > dx) ? 0x00FF00FF : 0xFF0000FF; 
-//
-//    while (1)
-//    {
-//        // Protection écran
-//        if (x0 >= 0 && x0 < 1920 && y0 >= 0 && y0 < 1080)
-//            mlx_set_image_pixel(mlx->mlx, mlx->img, x0, y0, (mlx_color){.rgba = color});
-//
-//        if (x0 == x1 && y0 == y1) break;
-//
-//        e2 = 2 * err;
-//        if (e2 > -dy) { err -= dy; x0 += sx; }
-//        if (e2 < dx)  { err += dx; y0 += sy; }
-//    }
-//}
+
+static int	absol(int value)
+{
+	if (value < 0)
+		return (-value);
+	return (value);
+}
 static void	trace(int fstx, int fsty, int sndx, int sndy, t_mlx *mlx)
 {
 	int	dx;
@@ -45,8 +27,8 @@ static void	trace(int fstx, int fsty, int sndx, int sndy, t_mlx *mlx)
 	int	sy;
 	int	e2;
 	
-	dx = ABS(sndx - fstx);
-	dy = ABS(sndy - fsty);
+	dx = absol(sndx - fstx);
+	dy = absol(sndy - fsty);
 	if (fstx < sndx)
 		sx = 1;
 	else
@@ -58,7 +40,10 @@ static void	trace(int fstx, int fsty, int sndx, int sndy, t_mlx *mlx)
 	err = dx - dy;
 	while (1)
 	{
-		mlx_set_image_pixel(mlx->mlx, mlx->img, fstx, fsty, (mlx_color)0xFFFFFFFF);
+		if (fstx >= 0 && fstx < 1920 && fsty >= 0 && fsty < 1080)
+		{
+			mlx_set_image_pixel(mlx->mlx, mlx->img, fstx, fsty, (mlx_color){.rgba = 0xFFFFFFFF});
+		}
 		if (fstx == sndx && fsty == sndy)
 			break ;
 		e2 = 2 *err;

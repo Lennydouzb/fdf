@@ -6,7 +6,7 @@
 /*   By: ldesboui <ldesboui@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 16:39:07 by ldesboui          #+#    #+#             */
-/*   Updated: 2025/12/08 19:32:28 by ldesboui         ###   ########.fr       */
+/*   Updated: 2025/12/08 21:21:10 by ldesboui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 # ifndef ZOOM
 #  define ZOOM 30
 # endif
-# define ABS(Value) (Value * (Value >= 0) - Value * (Value < 0))
 
 # include "../MacroLibX/includes/mlx.h"
 # include <fcntl.h>
