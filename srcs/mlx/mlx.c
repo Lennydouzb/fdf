@@ -6,7 +6,7 @@
 /*   By: ldesboui <ldesboui@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 13:35:39 by ldesboui          #+#    #+#             */
-/*   Updated: 2025/12/04 17:30:58 by ldesboui         ###   ########.fr       */
+/*   Updated: 2025/12/09 13:45:08 by ldesboui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,10 @@ t_mlx	*initialize()
 		return (NULL);
 	mlx->mlx = mlx_init();
 	if (!mlx->mlx)
+	{
+		free(mlx);
 		return (NULL);
+	}
 	mlx->info.title = "FdF";
 	mlx->info.width = 1920;
 	mlx->info.height = 1080;

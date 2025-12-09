@@ -18,6 +18,7 @@ SRCS = srcs/main.c \
 	   srcs/pixel/bresenham.c \
 	   srcs/mlx/mlx.c \
 	   srcs/events/events.c \
+	   srcs/mem_man/mem_man.c \
 
 
 OBJS = $(SRCS:.c=.o)

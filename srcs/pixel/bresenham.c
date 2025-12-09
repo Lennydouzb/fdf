@@ -6,7 +6,7 @@
 /*   By: ldesboui <ldesboui@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 12:59:34 by ldesboui          #+#    #+#             */
-/*   Updated: 2025/12/08 21:20:20 by ldesboui         ###   ########.fr       */
+/*   Updated: 2025/12/09 13:42:52 by ldesboui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void	trace(int fstx, int fsty, int sndx, int sndy, t_mlx *mlx)
 			mlx_set_image_pixel(mlx->mlx, mlx->img, fstx, fsty, (mlx_color){.rgba = 0xFFFFFFFF});
 		}
 		if (fstx == sndx && fsty == sndy)
-			break ;
+			return ;
 		e2 = 2 *err;
 		if (e2 > -dy)
 		{
@@ -66,7 +66,6 @@ void	bresenham(t_point *points, t_sizemap *size, t_mlx *mlx)
 	int	y;
 
 	y = 0;
-	print_points(points, size[0]);
 	while (y < size->size_y)
 	{
 		x = 0;
