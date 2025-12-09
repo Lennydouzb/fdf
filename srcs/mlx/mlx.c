@@ -6,7 +6,7 @@
 /*   By: ldesboui <ldesboui@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 13:35:39 by ldesboui          #+#    #+#             */
-/*   Updated: 2025/12/09 13:45:08 by ldesboui         ###   ########.fr       */
+/*   Updated: 2025/12/09 18:35:22 by ldesboui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,5 @@ t_mlx	*initialize()
 	mlx->win = mlx_new_window(mlx->mlx, &(mlx->info));
 	mlx->img = mlx_new_image(mlx->mlx, 1920, 1080);
 	mlx->img_info.render_target = mlx->img;
-	mlx->img_win = mlx_new_window(mlx->mlx, &(mlx->img_info));
 	return (mlx);
 }

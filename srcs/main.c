@@ -6,7 +6,7 @@
 /*   By: ldesboui <ldesboui@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 13:53:40 by ldesboui          #+#    #+#             */
-/*   Updated: 2025/12/09 13:42:39 by ldesboui         ###   ########.fr       */
+/*   Updated: 2025/12/09 18:40:30 by ldesboui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,9 @@ int	main(void)
     mlx_on_event(mlx->mlx, mlx->win, MLX_KEYDOWN, key_hook, mlx->mlx);
 	mlx_on_event(mlx->mlx, mlx->win, MLX_WINDOW_EVENT, win_hook, mlx->mlx);
 	mlx_loop(mlx->mlx);
-	//mlx_destroy_window(mlx->mlx, mlx->win);
-    //mlx_destroy_context(mlx->mlx);
+	mlx_destroy_image(mlx->mlx, mlx->img);
+	mlx_destroy_window(mlx->mlx, mlx->win);
+    mlx_destroy_context(mlx->mlx);
+	free(mlx);
 }
 

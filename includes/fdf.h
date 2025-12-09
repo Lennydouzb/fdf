@@ -6,7 +6,7 @@
 /*   By: ldesboui <ldesboui@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 16:39:07 by ldesboui          #+#    #+#             */
-/*   Updated: 2025/12/09 13:36:41 by ldesboui         ###   ########.fr       */
+/*   Updated: 2025/12/09 18:34:57 by ldesboui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ typedef struct	s_mlx
 	mlx_window_create_info	info;
 	mlx_window				win;
 	mlx_image				img;
-	mlx_window				img_win;
 	mlx_window_create_info	img_info;
 }	t_mlx;
 
