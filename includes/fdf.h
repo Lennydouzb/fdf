@@ -6,7 +6,7 @@
 /*   By: ldesboui <ldesboui@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 16:39:07 by ldesboui          #+#    #+#             */
-/*   Updated: 2025/12/10 18:07:31 by ldesboui         ###   ########.fr       */
+/*   Updated: 2025/12/11 00:05:49 by ldesboui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,11 @@
 # ifndef ZOOM
 #  define ZOOM 30
 # endif
-
+#include <stdio.h>
 # include "../MacroLibX/includes/mlx.h"
 # include <fcntl.h>
 # include <math.h>
 # include "../srcs/libft/libft.h"
-# include "../srcs/printf/ft_printf.h"
 
 typedef struct	s_mlx
 {
@@ -67,6 +66,15 @@ typedef struct s_step
 	int	sx;
 	int	sy;
 }	t_step;
+
+typedef struct s_size_r
+{
+	double	max_x;
+	double 	max_y;
+	double 	min_x;
+	double 	min_y;
+}	t_size_r;
+
 
 char	*get_next_line(int fd);
 int		nb_line(const char *map);
