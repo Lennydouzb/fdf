@@ -6,7 +6,7 @@
 /*   By: ldesboui <ldesboui@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 12:59:34 by ldesboui          #+#    #+#             */
-/*   Updated: 2025/12/09 13:42:52 by ldesboui         ###   ########.fr       */
+/*   Updated: 2025/12/10 18:19:39 by ldesboui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,45 +18,49 @@ static int	absol(int value)
 		return (-value);
 	return (value);
 }
-static void	trace(int fstx, int fsty, int sndx, int sndy, t_mlx *mlx)
+
+static void	calculate_move(t_pixel *fst, int *err, t_coef coef, t_step step)
 {
-	int	dx;
-	int	dy;
-	int	err;
-	int	sx;
-	int	sy;
-	int	e2;
-	
-	dx = absol(sndx - fstx);
-	dy = absol(sndy - fsty);
-	if (fstx < sndx)
-		sx = 1;
+	int	err2;
+
+	err2 = *err * 2;
+	if (err2 > -(coef.dy))
+	{
+		*err -= coef.dy;
+		fst->x += step.sx;
+	}
+	if (err2 < coef.dx)
+	{
+		*err += coef.dx;
+		fst->y += step.sy;
+	}
+}
+
+static void	trace(t_pixel fst, t_pixel snd, t_mlx *mlx)
+{
+	t_coef	coef;
+	int		err;
+	t_step	step;
+
+	if (fst.x < snd.x)
+		step.sx = 1;
 	else
-		sx = -1;
-	if (fsty < sndy)
-		sy = 1;
+		step.sx = -1;
+	if (fst.y < snd.y)
+		step.sy = 1;
 	else
-		sy = -1;
-	err = dx - dy;
+		step.sy = -1;
+	coef.dx = absol(snd.x - fst.x);
+	coef.dy = absol(snd.y - fst.y);
+	err = coef.dx - coef.dy;
 	while (1)
 	{
-		if (fstx >= 0 && fstx < 1920 && fsty >= 0 && fsty < 1080)
-		{
-			mlx_set_image_pixel(mlx->mlx, mlx->img, fstx, fsty, (mlx_color){.rgba = 0xFFFFFFFF});
-		}
-		if (fstx == sndx && fsty == sndy)
+		if (fst.x >= 0 && fst.x < 1920 && fst.y >= 0 && fst.y < 1080)
+			mlx_set_image_pixel(mlx->mlx, mlx->img,
+				fst.x, fst.y, (mlx_color){.rgba = 0xFFFFFFFF});
+		if (fst.x == snd.x && fst.y == snd.y)
 			return ;
-		e2 = 2 *err;
-		if (e2 > -dy)
-		{
-			err -= dy;
-			fstx += sx;
-		}
-		if (e2 < dx)
-		{
-			err += dx;
-			fsty += sy;
-		}
+		calculate_move(&fst, &err, coef, step);
 	}
 }
 
@@ -72,16 +76,15 @@ void	bresenham(t_point *points, t_sizemap *size, t_mlx *mlx)
 		while (x < size->size_x)
 		{
 			if (x < size->size_x - 1)
-				trace(points[x + size->size_x * y].screen_x, 
-					points[x + size->size_x * y].screen_y,
-					points[x + 1 + size->size_x * y].screen_x,
-					points[x + 1 + size->size_x * y].screen_y, mlx);
+				trace((t_pixel){.x = points[x + size->size_x * y].screen_x,
+					.y = points[x + size->size_x * y].screen_y},
+					(t_pixel){.x = points[x + 1 + size->size_x * y].screen_x,
+					.y = points[x + 1 + size->size_x * y].screen_y}, mlx);
 			if (y < size->size_y - 1)
-				trace(points[x + size->size_x * y].screen_x, 
-					points[x + size->size_x * y].screen_y,
-					points[x + size->size_x * (y + 1)].screen_x,
-					points[x + size->size_x * (y + 1)].screen_y, mlx);
-
+				trace((t_pixel){.x = points[x + size->size_x * y].screen_x,
+					.y = points[x + size->size_x * y].screen_y},
+					(t_pixel){.x = points[x + size->size_x * (y + 1)].screen_x,
+					.y = points[x + size->size_x * (y + 1)].screen_y}, mlx);
 			++x;
 		}
 		++y;

@@ -6,13 +6,13 @@
 /*   By: ldesboui <ldesboui@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 13:32:37 by ldesboui          #+#    #+#             */
-/*   Updated: 2025/12/09 13:32:37 by ldesboui         ###   ########.fr       */
+/*   Updated: 2025/12/10 18:22:07 by ldesboui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/fdf.h"
 
-void    freeall_strs(char **strs)
+void	freeall_strs(char **strs)
 {
 	int	i;
 
@@ -25,7 +25,7 @@ void    freeall_strs(char **strs)
 	free(strs);
 }
 
-void    freeall_intss(int **intss)
+void	freeall_intss(int **intss)
 {
 	int	i;
 
