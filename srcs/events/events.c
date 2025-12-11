@@ -6,7 +6,7 @@
 /*   By: ldesboui <ldesboui@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 17:15:44 by ldesboui          #+#    #+#             */
-/*   Updated: 2025/12/11 16:58:47 by ldesboui         ###   ########.fr       */
+/*   Updated: 2025/12/11 19:04:56 by ldesboui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ static void	key_hook(int key, void *param)
 		all = (t_all *)param;
 		reset_image(all->mlx);
 		all->mlx->zoom += -1;
+		if (all->mlx->zoom == -1)
+			all->mlx->zoom = 0;
 		place_color(all->mlx, all->points, all->size);
 	}
 	if (key == 81)

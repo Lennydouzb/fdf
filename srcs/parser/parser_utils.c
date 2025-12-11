@@ -27,6 +27,7 @@ int	nb_line(const char *map)
 		++nb;
 	}
 	free(str);
-	close(fd);
+	if (fd > 0)
+		close(fd);
 	return (nb);
 }

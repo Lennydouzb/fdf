@@ -6,7 +6,7 @@
 /*   By: ldesboui <ldesboui@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 18:33:54 by ldesboui          #+#    #+#             */
-/*   Updated: 2025/12/10 14:43:32 by ldesboui         ###   ########.fr       */
+/*   Updated: 2025/12/11 19:13:23 by ldesboui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,10 @@ static t_point	*strstopoints(char **strs, t_sizemap *size)
 
 	points = ft_calloc(sizeof(t_point), (size->size_x * size->size_y) + 1);
 	if (!points)
+	{
+		freeall_strs(strs);
 		return (NULL);
+	}
 	i = 0;
 	while (strs[i])
 	{
@@ -95,7 +98,8 @@ t_point	*parse(const char *map, t_sizemap *size)
 	strs[0] = get_next_line(fd);
 	if (!strs[0])
 	{
-		close(fd);
+		if (fd  > 0)
+			close(fd);
 		freeall_strs(strs);
 		return (NULL);
 	}
@@ -109,6 +113,7 @@ t_point	*parse(const char *map, t_sizemap *size)
 		points = strstopoints(strs, size);
 	else
 		points = NULL;
-	close(fd);
+	if (fd > 0)
+		close(fd);
 	return (points);
 }

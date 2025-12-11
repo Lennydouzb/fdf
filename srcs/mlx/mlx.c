@@ -6,7 +6,7 @@
 /*   By: ldesboui <ldesboui@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 13:35:39 by ldesboui          #+#    #+#             */
-/*   Updated: 2025/12/11 16:34:59 by ldesboui         ###   ########.fr       */
+/*   Updated: 2025/12/11 19:03:49 by ldesboui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,10 @@ t_mlx	*initialize(void)
 	mlx->offsetx = 0;
 	mlx->offsety = 0;
 	mlx->iso = 0;
-	mlx->zoom = 0;
+	mlx->zoom = -1;
 	mlx->angle_x = 0;
 	mlx->angle_y = 0;
 	mlx->angle_z = 0;
-	mlx->projection_mode = 0;
 	return (mlx);
 }
 

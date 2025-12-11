@@ -6,7 +6,7 @@
 /*   By: ldesboui <ldesboui@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 12:59:34 by ldesboui          #+#    #+#             */
-/*   Updated: 2025/12/10 18:19:39 by ldesboui         ###   ########.fr       */
+/*   Updated: 2025/12/11 19:00:01 by ldesboui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static void	trace(t_pixel fst, t_pixel snd, t_mlx *mlx)
 	{
 		if (fst.x >= 0 && fst.x < 1920 && fst.y >= 0 && fst.y < 1080)
 			mlx_set_image_pixel(mlx->mlx, mlx->img,
-				fst.x, fst.y, (mlx_color){.rgba = 0xFFFFFFFF});
+				fst.x, fst.y, (mlx_color){.rgba = 0xFFF00FFF});
 		if (fst.x == snd.x && fst.y == snd.y)
 			return ;
 		calculate_move(&fst, &err, coef, step);
