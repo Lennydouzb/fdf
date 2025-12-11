@@ -6,7 +6,7 @@
 /*   By: ldesboui <ldesboui@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 13:35:39 by ldesboui          #+#    #+#             */
-/*   Updated: 2025/12/10 16:26:57 by ldesboui         ###   ########.fr       */
+/*   Updated: 2025/12/11 16:34:59 by ldesboui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,29 @@ t_mlx	*initialize(void)
 	mlx->win = mlx_new_window(mlx->mlx, &(mlx->info));
 	mlx->img = mlx_new_image(mlx->mlx, 1920, 1080);
 	mlx->img_info.render_target = mlx->img;
+	mlx->offsetx = 0;
+	mlx->offsety = 0;
+	mlx->iso = 0;
+	mlx->zoom = 0;
+	mlx->angle_x = 0;
+	mlx->angle_y = 0;
+	mlx->angle_z = 0;
+	mlx->projection_mode = 0;
 	return (mlx);
 }
 
-void	loop_and_destroy_mlx(t_mlx *mlx)
+void	loop_and_destroy_mlx(t_mlx *mlx, t_point *points, t_sizemap *size)
 {
-	event_loop(mlx);
+	event_loop(mlx, points, size);
 	mlx_destroy_image(mlx->mlx, mlx->img);
 	mlx_destroy_window(mlx->mlx, mlx->win);
 	mlx_destroy_context(mlx->mlx);
 	free(mlx);
+}
+
+void	reset_image(t_mlx *mlx)
+{
+	mlx_destroy_image(mlx->mlx, mlx->img);
+	mlx->img = mlx_new_image(mlx->mlx, 1920, 1080);
+	mlx->img_info.render_target = mlx->img;
 }

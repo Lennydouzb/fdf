@@ -6,7 +6,7 @@
 /*   By: ldesboui <ldesboui@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 13:53:40 by ldesboui          #+#    #+#             */
-/*   Updated: 2025/12/10 16:33:52 by ldesboui         ###   ########.fr       */
+/*   Updated: 2025/12/11 14:03:06 by ldesboui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ int	main(int ac, char **av)
 			return (1);
 		}
 		place_color(mlx, points, &size);
+		loop_and_destroy_mlx(mlx, points, &size);
 		free(points);
-		loop_and_destroy_mlx(mlx);
 		return (0);
 	}
 	write (2, "No .fdf file passed in args, or multiple args\n", 46);

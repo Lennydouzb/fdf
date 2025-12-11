@@ -6,7 +6,7 @@
 /*   By: ldesboui <ldesboui@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 16:39:07 by ldesboui          #+#    #+#             */
-/*   Updated: 2025/12/11 00:05:49 by ldesboui         ###   ########.fr       */
+/*   Updated: 2025/12/11 16:57:26 by ldesboui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 # define FDF_H
 # ifndef ISO
 #	define ISO 0.523599
-# endif
-# ifndef ZOOM
-#  define ZOOM 30
 # endif
 #include <stdio.h>
 # include "../MacroLibX/includes/mlx.h"
@@ -31,6 +28,13 @@ typedef struct	s_mlx
 	mlx_window				win;
 	mlx_image				img;
 	mlx_window_create_info	img_info;
+	int						offsetx;
+	int						offsety;
+	double					iso;
+	int						zoom;
+	double					angle_x;
+	double					angle_y;
+	double					angle_z;
 }	t_mlx;
 
 typedef struct s_sizemap
@@ -75,6 +79,14 @@ typedef struct s_size_r
 	double 	min_y;
 }	t_size_r;
 
+typedef struct s_all
+{
+	t_mlx	*mlx;
+	t_point	*points;
+	t_sizemap *size;
+}	t_all;
+
+
 
 char	*get_next_line(int fd);
 int		nb_line(const char *map);
@@ -84,9 +96,13 @@ t_point	*parse(const char *map, t_sizemap *size);
 void	place_color(t_mlx *mlx, t_point *points, t_sizemap *size);
 t_mlx	*initialize();
 void	bresenham(t_point *points, t_sizemap *size, t_mlx *mlx);
-void	print_points(t_point *points, t_sizemap size);
-void	event_loop(t_mlx *mlx);
-void	loop_and_destroy_mlx(t_mlx *mlx);
+void	event_loop(t_mlx *mlx, t_point *points, t_sizemap *size);
+void	loop_and_destroy_mlx(t_mlx *mlx, t_point *points, t_sizemap *size);
+void	reset_image(t_mlx *mlx);
+void	rotate_x(double *y, double *z, double angle);
+void	rotate_y(double *x, double *z, double angle);
+void	rotate_z(double *x, double *y, double angle);
+
 
 
 #endif

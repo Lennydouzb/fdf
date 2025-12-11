@@ -14,6 +14,7 @@ SRCS = srcs/main.c \
 	   srcs/gnl/get_next_line_utils.c \
 	   srcs/pixel/pixel.c \
 	   srcs/pixel/bresenham.c \
+	   srcs/pixel/rotate.c \
 	   srcs/mlx/mlx.c \
 	   srcs/events/events.c \
 	   srcs/mem_man/mem_man.c \
