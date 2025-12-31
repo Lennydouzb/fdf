@@ -6,7 +6,7 @@
 /*   By: ldesboui <ldesboui@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 16:39:07 by ldesboui          #+#    #+#             */
-/*   Updated: 2025/12/11 16:57:26 by ldesboui         ###   ########.fr       */
+/*   Updated: 2025/12/31 17:28:01 by ldesboui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,6 @@ typedef struct s_all
 	t_sizemap *size;
 }	t_all;
 
-
-
 char	*get_next_line(int fd);
 int		nb_line(const char *map);
 void 	freeall_strs(char **strs);
@@ -102,7 +100,9 @@ void	reset_image(t_mlx *mlx);
 void	rotate_x(double *y, double *z, double angle);
 void	rotate_y(double *x, double *z, double angle);
 void	rotate_z(double *x, double *y, double angle);
-
-
+void	freestrs_close(int fd, char **strs);
+void	movements(int key, void *param, t_all *all);
+void	iso(int key, void *param, t_all *all);
+void	rotations(int key, void *param, t_all *all);
 
 #endif

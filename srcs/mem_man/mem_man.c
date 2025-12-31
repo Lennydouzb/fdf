@@ -6,7 +6,7 @@
 /*   By: ldesboui <ldesboui@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/09 13:32:37 by ldesboui          #+#    #+#             */
-/*   Updated: 2025/12/10 18:22:07 by ldesboui         ###   ########.fr       */
+/*   Updated: 2025/12/31 16:48:17 by ldesboui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,13 @@ void	freeall_intss(int **intss)
 		++i;
 	}
 	free(intss);
+}
+
+void	freestrs_close(int fd, char **strs)
+{
+	freeall_strs(strs);
+	if (fd > 0)
+		close(fd);
+	write (2, "Bad arg file :(\n", 16);
+	exit (0);
 }

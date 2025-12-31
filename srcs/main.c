@@ -6,7 +6,7 @@
 /*   By: ldesboui <ldesboui@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 13:53:40 by ldesboui          #+#    #+#             */
-/*   Updated: 2025/12/11 14:03:06 by ldesboui         ###   ########.fr       */
+/*   Updated: 2025/12/31 16:51:28 by ldesboui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	main(int ac, char **av)
 		points = parse(av[1], &size);
 		if (!points)
 		{
-			write (2, "Error on point parsing, arg file might not exist\n", 49);
+			write (2, "Error, arg file might not be rectangular\n", 49);
 			return (1);
 		}
 		mlx = initialize();

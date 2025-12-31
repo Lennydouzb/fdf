@@ -17,6 +17,9 @@ SRCS = srcs/main.c \
 	   srcs/pixel/rotate.c \
 	   srcs/mlx/mlx.c \
 	   srcs/events/events.c \
+	   srcs/events/iso.c \
+	   srcs/events/movements.c \
+	   srcs/events/rotations.c \
 	   srcs/mem_man/mem_man.c \
 
 
@@ -36,7 +39,7 @@ $(MLX_DIR):
 $(MLX): $(MLX_DIR)
 	$(MAKE) -C $(MLX_DIR)
 
-%.o:%.c
+.o:.c
 	$(CC) $(CFLAGS) -c $< -o $@ -g
 
 fclean: clean

@@ -6,17 +6,28 @@
 /*   By: ldesboui <ldesboui@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 18:33:54 by ldesboui          #+#    #+#             */
-/*   Updated: 2025/12/11 19:13:23 by ldesboui         ###   ########.fr       */
+/*   Updated: 2025/12/31 16:44:46 by ldesboui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/fdf.h"
 
-static void fill_points(t_point *points, char *str, int y, t_sizemap *size)
+static void	create_point(t_point *points, int i, int y, char **strs2)
+{
+	if (ft_strslen(strs2) > 1)
+		(*points).color.rgba = ft_atoi_hex(strs2[1]);
+	else
+		(*points).color.rgba = 0xFFFFFFFF;
+	(*points).x = i;
+	(*points).y = y;
+	(*points).z = ft_atoi(strs2[0]);
+}
+
+static void	fill_points(t_point *points, char *str, int y, t_sizemap *size)
 {
 	int		i;
 	char	**strs;
-	char 	**strs2;
+	char	**strs2;
 
 	strs = ft_split(str, ' ');
 	if (!strs)
@@ -30,13 +41,7 @@ static void fill_points(t_point *points, char *str, int y, t_sizemap *size)
 			freeall_strs(strs);
 			return ;
 		}
-		if (ft_strslen(strs2) > 1)
-			(points[i + y * size->size_x]).color.rgba = ft_atoi_hex(strs2[1]);
-		else
-			(points[i + y * size->size_x]).color.rgba = 0xFFFFFFFF;
-		points[i + y * size->size_x].x = i;
-		points[i + y * size->size_x].y = y;
-		points[i + y * size->size_x].z = ft_atoi(strs2[0]);
+		create_point(&points[i + y * size->size_x], i, y, strs2);
 		++i;
 		freeall_strs(strs2);
 	}
@@ -45,8 +50,8 @@ static void fill_points(t_point *points, char *str, int y, t_sizemap *size)
 
 static t_point	*strstopoints(char **strs, t_sizemap *size)
 {
-	t_point *points;
-	int i;
+	t_point	*points;
+	int		i;
 
 	points = ft_calloc(sizeof(t_point), (size->size_x * size->size_y) + 1);
 	if (!points)
@@ -87,7 +92,7 @@ t_point	*parse(const char *map, t_sizemap *size)
 	char	**strs;
 	int		fd;
 	int		nb;
-	t_point *points;
+	t_point	*points;
 
 	nb = nb_line(map);
 	strs = ft_calloc(sizeof(char *), nb + 1);
@@ -96,24 +101,15 @@ t_point	*parse(const char *map, t_sizemap *size)
 	fd = open (map, O_RDONLY);
 	nb = 0;
 	strs[0] = get_next_line(fd);
-	if (!strs[0])
-	{
-		if (fd  > 0)
-			close(fd);
-		freeall_strs(strs);
-		return (NULL);
-	}
+	if (fd < 0 || !strs[0])
+		freestrs_close(fd, strs);
 	while (strs[nb])
-	{
-		++nb;
-		strs[nb] = get_next_line(fd);
-	}
+		strs[++nb] = get_next_line(fd);
 	nb = size_xy(strs, size);
 	if (nb == 1)
 		points = strstopoints(strs, size);
 	else
 		points = NULL;
-	if (fd > 0)
-		close(fd);
+	close(fd);
 	return (points);
 }

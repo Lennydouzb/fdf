@@ -6,21 +6,21 @@
 /*   By: ldesboui <ldesboui@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 15:26:43 by ldesboui          #+#    #+#             */
-/*   Updated: 2025/12/11 19:03:56 by ldesboui         ###   ########.fr       */
+/*   Updated: 2025/12/31 15:01:06 by ldesboui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/fdf.h"
 
-static void calc(t_point pts, t_sizemap *size, double iso, t_size_r *size_r)
+static void	calc(t_point pts, t_sizemap *size, double iso, t_size_r *size_r)
 {
 	double	render_x;
 	double	render_y;
-	
+
 	render_x = ((pts.x - size->size_x / 2.0)
 			- (pts.y - size->size_y / 2.0)) * cos(iso);
 	render_y = ((pts.x - size->size_x / 2.0)
-		+ (pts.y - size->size_y / 2)) * sin(iso) - (pts.z);
+			+ (pts.y - size->size_y / 2)) * sin(iso) - (pts.z);
 	if (render_x > size_r->max_x)
 		size_r->max_x = render_x;
 	if (render_x < size_r->min_x)
@@ -31,7 +31,7 @@ static void calc(t_point pts, t_sizemap *size, double iso, t_size_r *size_r)
 		size_r->min_y = render_y;
 }
 
-static int	find_zoom(t_point *pts, t_sizemap *size, 
+static int	find_zoom(t_point *pts, t_sizemap *size,
 	double iso, t_size_r *size_r)
 {
 	int	i;
@@ -59,11 +59,11 @@ static int	find_zoom(t_point *pts, t_sizemap *size,
 	return (zoom_y);
 }
 
-static void coordinates(t_point *points, t_sizemap *size, t_mlx *mlx)
+static void	coordinates(t_point *points, t_sizemap *size, t_mlx *mlx)
 {
-	double center_x;
-	double center_y;
-	double double_z;
+	double	center_x;
+	double	center_y;
+	double	double_z;
 
 	double_z = (double)points->z;
 	center_x = points->x - (size->size_x / 2);
@@ -71,9 +71,9 @@ static void coordinates(t_point *points, t_sizemap *size, t_mlx *mlx)
 	rotate_x(&center_y, &double_z, mlx->angle_x);
 	rotate_y(&center_x, &double_z, mlx->angle_y);
 	rotate_z(&center_x, &center_y, mlx->angle_z);
-	points->screen_x = (center_x - center_y) * mlx->zoom * cos(mlx->iso) ;
-	points->screen_y = (center_x + center_y) * mlx->zoom * sin(mlx->iso) - (double_z 
-		* mlx->zoom);
+	points->screen_x = (center_x - center_y) * mlx->zoom * cos(mlx->iso);
+	points->screen_y = (center_x + center_y) * mlx->zoom
+		* sin(mlx->iso) - (double_z * mlx->zoom);
 	points->screen_x += mlx->offsetx;
 	points->screen_y += mlx->offsety;
 }
@@ -81,16 +81,16 @@ static void coordinates(t_point *points, t_sizemap *size, t_mlx *mlx)
 void	place_color(t_mlx *mlx, t_point *points, t_sizemap *size)
 {
 	int			i;
-	t_size_r 	limits;
-	
+	t_size_r	limits;
+
 	if (mlx->iso == 0)
 		mlx->iso = ISO;
 	if (mlx->zoom == -1)
 		mlx->zoom = find_zoom(points, size, mlx->iso, &limits);
 	if (mlx->offsetx == 0)
-		mlx->offsetx = 1920 / 2 -((limits.max_x + limits.min_x)) * mlx->zoom / 2;
+		mlx->offsetx = 960 - (limits.max_x + limits.min_x) * mlx->zoom / 2;
 	if (mlx->offsety == 0)
-		mlx->offsety = 1080 / 2 - ((limits.max_y + limits.min_y)) * mlx->zoom / 2;
+		mlx->offsety = 540 - (limits.max_y + limits.min_y) * mlx->zoom / 2;
 	i = 0;
 	if (mlx->zoom == 0)
 		mlx->zoom = 1;
