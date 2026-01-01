@@ -6,7 +6,7 @@
 /*   By: ldesboui <ldesboui@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/08 12:59:34 by ldesboui          #+#    #+#             */
-/*   Updated: 2025/12/31 15:05:23 by ldesboui         ###   ########.fr       */
+/*   Updated: 2026/01/01 16:18:56 by ldesboui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,24 +42,25 @@ static void	trace(t_pixel fst, t_pixel snd, t_mlx *mlx)
 	int		err;
 	t_step	step;
 
+	step.sx = -1;
+	step.sy = -1;
 	if (fst.x < snd.x)
 		step.sx = 1;
-	else
-		step.sx = -1;
 	if (fst.y < snd.y)
 		step.sy = 1;
-	else
-		step.sy = -1;
 	coef.dx = absol(snd.x - fst.x);
 	coef.dy = absol(snd.y - fst.y);
 	err = coef.dx - coef.dy;
+	if (fst.x == snd.x && fst.y == snd.y)
+		return ;
+	calculate_move(&fst, &err, coef, step);
 	while (1)
 	{
-		if (fst.x >= 0 && fst.x < 1920 && fst.y >= 0 && fst.y < 1080)
-			mlx_set_image_pixel(mlx->mlx, mlx->img,
-				fst.x, fst.y, (mlx_color){.rgba = 0xFFF00FFF});
 		if (fst.x == snd.x && fst.y == snd.y)
 			return ;
+		if (fst.x >= 0 && fst.x < 1920 && fst.y >= 0 && fst.y < 1080)
+			mlx_set_image_pixel(mlx->mlx, mlx->img,
+				fst.x, fst.y, (mlx_color){.rgba = 0x0000FFFF});
 		calculate_move(&fst, &err, coef, step);
 	}
 }

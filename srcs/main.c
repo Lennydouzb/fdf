@@ -6,7 +6,7 @@
 /*   By: ldesboui <ldesboui@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 13:53:40 by ldesboui          #+#    #+#             */
-/*   Updated: 2026/01/01 11:45:25 by ldesboui         ###   ########.fr       */
+/*   Updated: 2026/01/01 15:30:15 by ldesboui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,5 @@ int	main(int ac, char **av)
 		free(points);
 		return (0);
 	}
-	write (2, "No .fdf file passed in args, or multiple args\n", 46);
+	write (2, "No fdf file passed in args, or multiple args\n", 46);
 }

@@ -6,7 +6,7 @@
 /*   By: ldesboui <ldesboui@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/03 15:26:43 by ldesboui          #+#    #+#             */
-/*   Updated: 2025/12/31 15:01:06 by ldesboui         ###   ########.fr       */
+/*   Updated: 2026/01/01 17:07:02 by ldesboui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,6 @@ void	place_color(t_mlx *mlx, t_point *points, t_sizemap *size)
 	int			i;
 	t_size_r	limits;
 
-	if (mlx->iso == 0)
-		mlx->iso = ISO;
 	if (mlx->zoom == -1)
 		mlx->zoom = find_zoom(points, size, mlx->iso, &limits);
 	if (mlx->offsetx == 0)

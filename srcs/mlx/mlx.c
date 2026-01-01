@@ -6,7 +6,7 @@
 /*   By: ldesboui <ldesboui@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 13:35:39 by ldesboui          #+#    #+#             */
-/*   Updated: 2026/01/01 11:40:53 by ldesboui         ###   ########.fr       */
+/*   Updated: 2026/01/01 17:06:44 by ldesboui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ t_mlx	*initialize(void)
 	mlx->img_info.render_target = mlx->img;
 	mlx->offsetx = 0;
 	mlx->offsety = 0;
-	mlx->iso = 0;
+	mlx->iso = ISO;
 	mlx->zoom = -1;
 	mlx->angle_x = 0;
 	mlx->angle_y = 0;
