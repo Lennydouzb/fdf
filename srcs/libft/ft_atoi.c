@@ -6,7 +6,7 @@
 /*   By: ldesboui <ldesboui@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/14 17:49:24 by ldesboui          #+#    #+#             */
-/*   Updated: 2025/12/05 15:45:18 by ldesboui         ###   ########.fr       */
+/*   Updated: 2026/01/01 11:29:09 by ldesboui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,8 @@ int	ft_atoi_hex(const char *nptr)
 	nbr = 0;
 	if (nptr[k] == '0' && (nptr[k + 1] == 'x' || nptr[k + 1] == 'X'))
 		k += 2;
-	while ((nptr[k] >= '0' && nptr[k] <= '9') || (nptr[k] >= 'a' && nptr[k] <= 'f')
+	while ((nptr[k] >= '0' && nptr[k] <= '9')
+		|| (nptr[k] >= 'a' && nptr[k] <= 'f')
 		|| (nptr[k] >= 'A' && nptr[k] <= 'F'))
 	{
 		if (nptr[k] >= '0' && nptr[k] <= '9')

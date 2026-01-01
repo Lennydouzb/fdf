@@ -6,22 +6,22 @@
 /*   By: ldesboui <ldesboui@42angouleme.fr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/02 16:39:07 by ldesboui          #+#    #+#             */
-/*   Updated: 2025/12/31 17:28:01 by ldesboui         ###   ########.fr       */
+/*   Updated: 2026/01/01 11:41:36 by ldesboui         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 # ifndef ISO
-#	define ISO 0.523599
+#  define ISO 0.523599
 # endif
-#include <stdio.h>
+# include <stdio.h>
 # include "../MacroLibX/includes/mlx.h"
 # include <fcntl.h>
 # include <math.h>
 # include "../srcs/libft/libft.h"
 
-typedef struct	s_mlx
+typedef struct s_mlx
 {
 	mlx_context				mlx;
 	mlx_window_create_info	info;
@@ -74,25 +74,25 @@ typedef struct s_step
 typedef struct s_size_r
 {
 	double	max_x;
-	double 	max_y;
-	double 	min_x;
-	double 	min_y;
+	double	max_y;
+	double	min_x;
+	double	min_y;
 }	t_size_r;
 
 typedef struct s_all
 {
-	t_mlx	*mlx;
-	t_point	*points;
-	t_sizemap *size;
+	t_mlx		*mlx;
+	t_point		*points;
+	t_sizemap	*size;
 }	t_all;
 
 char	*get_next_line(int fd);
 int		nb_line(const char *map);
-void 	freeall_strs(char **strs);
+void	freeall_strs(char **strs);
 void	freeall_intss(int **intss);
 t_point	*parse(const char *map, t_sizemap *size);
 void	place_color(t_mlx *mlx, t_point *points, t_sizemap *size);
-t_mlx	*initialize();
+t_mlx	*initialize(void);
 void	bresenham(t_point *points, t_sizemap *size, t_mlx *mlx);
 void	event_loop(t_mlx *mlx, t_point *points, t_sizemap *size);
 void	loop_and_destroy_mlx(t_mlx *mlx, t_point *points, t_sizemap *size);
